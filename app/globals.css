@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --bg: #fbfaf7;
+  --panel: #ffffff;
+  --ink: #1b1b1a;
+  --muted: #5c5b57;
+  --rule: #d9d6ce;
+  --rule-strong: #1b1b1a;
+  --accent: #7a1f12;
+  --accent-ink: #ffffff;
+  --focus: #2a78d6;
+  --serif: var(--font-source-serif), Cambria, Georgia, "Times New Roman", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #1a1a19;
+    --panel: #222220;
+    --ink: #ecebe6;
+    --muted: #a9a79f;
+    --rule: #3d3c38;
+    --rule-strong: #ecebe6;
+    --accent: #f0a183;
+    --accent-ink: #1a1a19;
+    --focus: #6da7ec;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --font-serif: var(--serif);
+  --font-sans: var(--sans);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Suwaki: duży obszar dotyku, klasyczny wygląd. */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 28px;
+  background: transparent;
+  cursor: pointer;
+  touch-action: pan-y;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 2px;
+  background: var(--ink);
+}
+input[type="range"]::-moz-range-track {
+  height: 2px;
+  background: var(--ink);
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -9px;
+  border-radius: 50%;
+  background: var(--panel);
+  border: 2px solid var(--ink);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--panel);
+  border: 2px solid var(--ink);
+}
+
+select,
+input[type="number"] {
+  background: var(--panel);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 6px 8px;
+  font: inherit;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  background: var(--panel);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.2;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn:hover {
+  background: var(--bg);
+}
+.btn[aria-pressed="true"],
+.btn.is-on {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.tab {
+  padding: 10px 2px;
+  margin-right: 18px;
+  border-bottom: 3px solid transparent;
+  color: var(--muted);
+  font-family: var(--serif);
+  font-size: 16px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.tab[aria-selected="true"] {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+  font-weight: 700;
+}
+
+.small-caps {
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+
+dialog::backdrop {
+  background: rgb(0 0 0 / 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Rząd przycisków: na telefonie przewijany w poziomie zamiast łamania na kilka linii. */
+.chip-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-inline: -16px;
+  padding-inline: 16px;
+}
+.chip-row::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 640px) {
+  .chip-row {
+    flex-wrap: wrap;
+    overflow: visible;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .btn {
+    min-height: 34px;
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+}
+
+/* Fotele na mapie: wyraźna reakcja na wskazanie i fokus z klawiatury. */
+.seat:hover .seat-shape {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.seat:focus-visible .seat-shape {
+  stroke: var(--focus);
+  stroke-width: 2.5;
+}
